@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mautic Demo — Lead Capture</title>
+  <meta name="description" content="Sign up to join our email campaign and get exclusive updates delivered to your inbox." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="landing-page">
+
+  <!-- NAV -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">✉</span>
+        <span>Mautic<strong>Demo</strong></span>
+      </a>
+      <a href="dashboard.html" class="btn btn-outline">Campaign Dashboard →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">📢 New Campaign Active</span>
+      <h1>Grow Your Audience<br/>with Smart Email Campaigns</h1>
+      <p class="hero-sub">
+        Capture leads, nurture them with automated email sequences,
+        and track every open, click, and conversion — all in one place.
+      </p>
+      <div class="hero-stats">
+        <div class="stat"><strong>12,400+</strong><span>Leads Captured</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>84%</strong><span>Open Rate</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>3x</strong><span>ROI Average</span></div>
+      </div>
+    </div>
+
+    <!-- LEAD CAPTURE FORM -->
+    <div class="form-card" id="lead-form-card">
+      <div class="form-header">
+        <div class="form-icon">🎯</div>
+        <h2>Join Our Campaign</h2>
+        <p>Get weekly insights delivered straight to your inbox.</p>
+      </div>
+
+      <!-- Real Mautic Form Embed -->
+      <script type="text/javascript" src="http://localhost:8080/form/generate.js?id=1"></script>
+
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Why Mautic?</h2>
+      <p class="section-sub">Open-source marketing automation that puts you in control.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Smart Lead Capture</h3>
+          <p>Embed forms on any page and automatically segment leads by interest, source, and behaviour.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>Email Automation</h3>
+          <p>Build drip campaigns with visual workflows — send the right message at the right time.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Real-time Analytics</h3>
+          <p>Track open rates, click-throughs, and conversions with a live campaign dashboard.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>GDPR Ready</h3>
+          <p>Built-in consent management, double opt-in, and unsubscribe handling out of the box.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 MauticDemo · Built with <a href="https://www.mautic.org" target="_blank">Mautic</a> · Open Source Marketing Automation</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

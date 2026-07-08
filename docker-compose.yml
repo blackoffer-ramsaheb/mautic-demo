@@ -1,0 +1,48 @@
+services:
+  mautic:
+    image: mautic/mautic:5-apache
+    container_name: mautic_app
+    ports:
+      - "8080:80"
+    environment:
+      MAUTIC_DB_HOST: db
+      MAUTIC_DB_PORT: 3306
+      MAUTIC_DB_DATABASE: mautic
+      MAUTIC_DB_USER: mautic
+      MAUTIC_DB_PASSWORD: mautic
+      APACHE_DOCUMENT_ROOT: /var/www/html/docroot
+      DOCKER_MAUTIC_RUN_MIGRATIONS: "true"
+      PHP_MEMORY_LIMIT: 512M
+      PHP_MAX_UPLOAD: 128M
+      PHP_MAX_EXECUTION_TIME: 300
+    volumes:
+      - mautic_data:/var/www/html/var/data
+      - mautic_logs:/var/www/html/var/logs
+      - mautic_config:/var/www/html/config
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: mariadb:11
+    container_name: mautic_db
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: mautic
+      MARIADB_USER: mautic
+      MARIADB_PASSWORD: mautic
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  mautic_data:
+  mautic_logs:
+  mautic_config:
+  db_data:

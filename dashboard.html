@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mautic Demo — Campaign Dashboard</title>
+  <meta name="description" content="Track email campaign performance: opens, clicks, leads, and conversions in real time." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard-page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">✉</span>
+      <span>Mautic<strong>Demo</strong></span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="nav-item active" id="nav-dashboard">
+        <span class="nav-icon">📊</span> Dashboard
+      </a>
+      <a href="#" class="nav-item" id="nav-campaigns" onclick="showSection('campaigns'); return false;">
+        <span class="nav-icon">📧</span> Campaigns
+      </a>
+      <a href="#" class="nav-item" id="nav-leads" onclick="showSection('leads'); return false;">
+        <span class="nav-icon">👥</span> Leads
+      </a>
+      <a href="#" class="nav-item" id="nav-forms" onclick="showSection('forms'); return false;">
+        <span class="nav-icon">📋</span> Forms
+      </a>
+      <a href="#" class="nav-item" id="nav-segments" onclick="showSection('segments'); return false;">
+        <span class="nav-icon">🏷️</span> Segments
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="index.html" class="btn btn-outline btn-sm">← Landing Page</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" id="hamburger" onclick="toggleSidebar()">☰</button>
+        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="topbar-right">
+        <span class="live-badge">🟢 Live</span>
+        <div class="avatar">JD</div>
+      </div>
+    </header>
+
+    <!-- ── DASHBOARD SECTION ── -->
+    <section class="section active" id="section-dashboard">
+
+      <!-- KPI CARDS -->
+      <div class="kpi-grid">
+        <div class="kpi-card" style="--accent:#7c3aed">
+          <div class="kpi-top">
+            <span class="kpi-label">Total Leads</span>
+            <span class="kpi-icon">👥</span>
+          </div>
+          <div class="kpi-value" data-target="3248">0</div>
+          <div class="kpi-delta positive">↑ 12% this week</div>
+        </div>
+        <div class="kpi-card" style="--accent:#0ea5e9">
+          <div class="kpi-top">
+            <span class="kpi-label">Emails Sent</span>
+            <span class="kpi-icon">📧</span>
+          </div>
+          <div class="kpi-value" data-target="18540">0</div>
+          <div class="kpi-delta positive">↑ 8% this week</div>
+        </div>
+        <div class="kpi-card" style="--accent:#10b981">
+          <div class="kpi-top">
+            <span class="kpi-label">Open Rate</span>
+            <span class="kpi-icon">👁️</span>
+          </div>
+          <div class="kpi-value" data-target="42" data-suffix="%">0</div>
+          <div class="kpi-delta positive">↑ 3% vs last campaign</div>
+        </div>
+        <div class="kpi-card" style="--accent:#f59e0b">
+          <div class="kpi-top">
+            <span class="kpi-label">Click Rate</span>
+            <span class="kpi-icon">🖱️</span>
+          </div>
+          <div class="kpi-value" data-target="18" data-suffix="%">0</div>
+          <div class="kpi-delta negative">↓ 1% vs last campaign</div>
+        </div>
+      </div>
+
+      <!-- CHARTS ROW -->
+      <div class="charts-row">
+        <!-- Engagement Over Time -->
+        <div class="chart-card wide">
+          <div class="chart-header">
+            <h2>Engagement Over Time</h2>
+            <div class="chart-legend">
+              <span class="legend-dot" style="background:#7c3aed"></span> Opens
+              <span class="legend-dot" style="background:#10b981"></span> Clicks
+            </div>
+          </div>
+          <div class="bar-chart" id="engagementChart"></div>
+        </div>
+
+        <!-- Device Breakdown -->
+        <div class="chart-card">
+          <div class="chart-header"><h2>Device Breakdown</h2></div>
+          <div class="donut-wrap">
+            <svg viewBox="0 0 120 120" class="donut-svg" id="donutSvg"></svg>
+            <div class="donut-legend" id="donutLegend"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAMPAIGNS TABLE + RECENT LEADS -->
+      <div class="bottom-row">
+        <div class="table-card">
+          <div class="card-header">
+            <h2>Active Campaigns</h2>
+            <button class="btn btn-primary btn-sm" onclick="showSection('campaigns')">View All</button>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Campaign</th>
+                <th>Status</th>
+                <th>Sent</th>
+                <th>Opens</th>
+                <th>Clicks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Welcome Series</strong></td>
+                <td><span class="badge-status active">Active</span></td>
+                <td>5,210</td>
+                <td>48%</td>
+                <td>22%</td>
+              </tr>
+              <tr>
+                <td><strong>Product Launch Q3</strong></td>
+                <td><span class="badge-status active">Active</span></td>
+                <td>3,840</td>
+                <td>41%</td>
+                <td>19%</td>
+              </tr>
+              <tr>
+                <td><strong>Re-engagement Drip</strong></td>
+                <td><span class="badge-status paused">Paused</span></td>
+                <td>2,100</td>
+                <td>29%</td>
+                <td>11%</td>
+              </tr>
+              <tr>
+                <td><strong>Newsletter — July</strong></td>
+                <td><span class="badge-status draft">Draft</span></td>
+                <td>—</td>
+                <td>—</td>
+                <td>—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-card">
+          <div class="card-header">
+            <h2>Recent Leads</h2>
+            <button class="btn btn-primary btn-sm" onclick="showSection('leads')">View All</button>
+          </div>
+          <ul class="lead-list" id="recentLeadsList"></ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── CAMPAIGNS SECTION ── -->
+    <section class="section" id="section-campaigns">
+      <div class="section-toolbar">
+        <h2>Email Campaigns</h2>
+        <button class="btn btn-primary btn-sm" id="newCampaignBtn" onclick="openCampaignModal()">+ New Campaign</button>
+      </div>
+      <div class="campaigns-grid" id="campaignsGrid"></div>
+    </section>
+
+    <!-- ── LEADS SECTION ── -->
+    <section class="section" id="section-leads">
+      <div class="section-toolbar">
+        <h2>All Leads</h2>
+        <input type="search" id="leadSearch" placeholder="Search leads…" class="search-input" oninput="filterLeads(this.value)" />
+      </div>
+      <div class="table-card" style="margin-top:0">
+        <table class="data-table" id="leadsTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Company</th>
+              <th>Interest</th>
+              <th>Joined</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── FORMS SECTION ── -->
+    <section class="section" id="section-forms">
+      <div class="section-toolbar"><h2>Lead Capture Forms</h2></div>
+      <div class="forms-grid">
+        <div class="form-info-card">
+          <div class="form-info-icon">📋</div>
+          <h3>Campaign Signup Form</h3>
+          <p>Embeds on your landing page. Captures name, email, company, and interest.</p>
+          <div class="form-info-stats">
+            <span>👁️ 4,820 views</span>
+            <span>✅ 3,248 submissions</span>
+            <span>📈 67% conversion</span>
+          </div>
+          <div class="embed-box">
+            <label>Embed Code</label>
+            <code>&lt;script src="https://your-mautic.com/form/1/generate.js"&gt;&lt;/script&gt;</code>
+            <button class="btn btn-outline btn-sm" onclick="copyEmbed()">📋 Copy</button>
+          </div>
+          <a href="index.html" class="btn btn-primary btn-sm" style="margin-top:1rem">Preview Form →</a>
+        </div>
+        <div class="form-info-card">
+          <div class="form-info-icon">🔔</div>
+          <h3>Webinar Registration</h3>
+          <p>Collects attendee info for upcoming webinar events. Double opt-in enabled.</p>
+          <div class="form-info-stats">
+            <span>👁️ 1,200 views</span>
+            <span>✅ 540 submissions</span>
+            <span>📈 45% conversion</span>
+          </div>
+          <div class="embed-box">
+            <label>Embed Code</label>
+            <code>&lt;script src="https://your-mautic.com/form/2/generate.js"&gt;&lt;/script&gt;</code>
+            <button class="btn btn-outline btn-sm" onclick="copyEmbed2()">📋 Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SEGMENTS SECTION ── -->
+    <section class="section" id="section-segments">
+      <div class="section-toolbar"><h2>Audience Segments</h2></div>
+      <div class="segments-grid">
+        <div class="segment-card">
+          <div class="segment-header" style="--seg-color:#7c3aed">
+            <span class="segment-icon">🏷️</span>
+            <strong>Email Marketing</strong>
+          </div>
+          <p>Leads interested in email marketing tips and best practices.</p>
+          <div class="segment-count">842 contacts</div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-header" style="--seg-color:#0ea5e9">
+            <span class="segment-icon">🏷️</span>
+            <strong>Lead Generation</strong>
+          </div>
+          <p>Prospects looking to grow their pipeline with lead gen strategies.</p>
+          <div class="segment-count">1,120 contacts</div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-header" style="--seg-color:#10b981">
+            <span class="segment-icon">🏷️</span>
+            <strong>Automation</strong>
+          </div>
+          <p>Users exploring marketing automation workflows and drip sequences.</p>
+          <div class="segment-count">690 contacts</div>
+        </div>
+        <div class="segment-card">
+          <div class="segment-header" style="--seg-color:#f59e0b">
+            <span class="segment-icon">🏷️</span>
+            <strong>Analytics</strong>
+          </div>
+          <p>Data-driven marketers tracking campaign performance metrics.</p>
+          <div class="segment-count">596 contacts</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NEW CAMPAIGN MODAL -->
+  <div class="modal-overlay hidden" id="campaignModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Create New Campaign</h2>
+        <button class="modal-close" onclick="closeCampaignModal()">✕</button>
+      </div>
+      <form id="campaignForm" onsubmit="saveCampaign(event)">
+        <div class="form-group">
+          <label>Campaign Name</label>
+          <input type="text" id="campaignName" placeholder="e.g. Summer Promo 2026" required />
+        </div>
+        <div class="form-group">
+          <label>Subject Line</label>
+          <input type="text" id="campaignSubject" placeholder="e.g. 🌞 Exclusive summer deals just for you" required />
+        </div>
+        <div class="form-group">
+          <label>Target Segment</label>
+          <select id="campaignSegment">
+            <option value="all">All Subscribers</option>
+            <option value="email-marketing">Email Marketing</option>
+            <option value="lead-gen">Lead Generation</option>
+            <option value="automation">Automation</option>
+            <option value="analytics">Analytics</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Send Date</label>
+          <input type="date" id="campaignDate" required />
+        </div>
+        <div class="form-group">
+          <label>Email Body (Preview)</label>
+          <textarea id="campaignBody" rows="4" placeholder="Write a short description or preview text for this campaign…"></textarea>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline" onclick="closeCampaignModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Campaign</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
